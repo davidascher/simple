@@ -1,0 +1,16 @@
+.editable {
+  position: relative;
+
+  .edit-button {
+    width: 32px;
+    height: 32px;
+    position: fixed;
+    top:0;
+    right:0;
+  }
+}
+
+.editable:hover {
+  background: #dff5e3
+}
+

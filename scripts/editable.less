@@ -1,0 +1,103 @@
+@system: #000;
+@black: #3B4E5B;
+@white: #FFF;
+
+@turquoise: #64A8EE;
+@blue: #3386C0;
+@secondaryBlue: #315D8A;
+@neonblue: #00a9f5;
+@purple: #8A88CD;
+@yellow: #FFE62C;
+@red: #FF5C5A;
+@green: #1EC08B;
+@slate: #3B4E5B;
+
+@darkGrey: #638093;
+@mediumGrey: #A5BECE;
+@lightGrey: #E1EBF1;
+@extraGrey: #F6F7F7;
+
+@lightGreyUnsaturated: #F5F5F5;
+
+@highlight: @turquoise;
+@darkHighlight: #005d8e;
+@background: @extraGrey;
+
+
+.editable {
+  position: relative;
+
+  .button {
+    border: 1px solid @lightGrey;
+    border-radius: 3px;
+    padding: 4px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+  }
+
+  .edit-button {
+    width: 36px;
+    height: 36px;
+    position: absolute;
+    top:0;
+    right: -36px;
+    color: @black;
+  }
+  .edit-button:hover {
+    color: @lightGrey;
+    background-color: @highlight;
+  }
+}
+
+.editor {
+  position: fixed;
+  top: 4em;
+  right: 4em;
+  width: 40%;
+  height: 90%;
+  background-color: rgba(255,255,255,.6);
+  z-index: 9999;
+
+  .editor-background {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    // z-index: 99;
+  }
+
+  .inputfield {
+    padding: 5px;
+    width: 100%;
+    height: calc(100%-20px);
+    vertical-align: top;
+    background-color: transparent;
+  }
+
+  .editor::before {
+    background-color: white;
+    filter: blur(5px);
+  }
+
+  .toolbar {
+    height: 38px;
+    padding: 6px;
+    background-color: @black;
+
+    .editor-button {
+      width: 24px;
+      height: 24px;
+      padding: 3px;
+      margin-left: 5px;
+      border-radius: 3px;
+      border: 1px solid @lightGreyUnsaturated;
+      background-color: @lightGrey;
+    }
+    .editor-button:hover {
+      background-color: @highlight;
+      color: @white;
+    }
+  }
+
+}
