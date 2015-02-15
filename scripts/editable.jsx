@@ -1,6 +1,9 @@
 var React = require('react');
 var Markdown = require('./markdownfile.jsx');
 var markdown = require('markdown').markdown;
+var Draggable = require('react-draggable');
+var ResizableBox = require('react-resizable').ResizableBox;
+
 require("./editable.less");
 
 var EditorButton = React.createClass({
@@ -17,6 +20,9 @@ var EditorButton = React.createClass({
 });
 
 var Editor = React.createClass({
+  getInitialState:function() {
+    return {blurred:false};
+  },
   onChange: function(event) {
     //
   },
@@ -25,21 +31,49 @@ var Editor = React.createClass({
     console.log(event.target.value);
     this.props.onchange(event.target.value);
   },
+  onMouseDown: function(event) {
+
+  },
+  onMouseMove: function(event) {
+    // console.log(event);
+  },
+  onBlur: function(event) {
+    console.log("got blur event");
+    this.setState({blurred:true})
+  },
+  onFocus: function(event) {
+    console.log("got focus event");
+    this.setState({blurred:false})
+  },
   render: function() {
-    var editorStyle = {display: this.props.visible == true ? "block" : "none"}
+    var editorStyle = {
+      display: this.props.visible == true ? "block" : "none",
+    }
+    var classes = "editor-container ";
+    if (this.state.blurred) {
+      classes = classes + "blurred";
+    } else {
+      classes = classes + "active";
+    }
     return (
-      <div style={editorStyle} className="editor">
-        <div className="toolbar">
-          <EditorButton icon="header"/>
-          <EditorButton icon="bold"/>
-          <EditorButton icon="italic"/>
-        </div>
-        <div className="editor-background"/>
-        <textarea defaultValue={this.props.text} 
-                  onChange={this.onChange} 
-                  onKeyUp={this.onKeyUp} 
-                  className="inputfield"></textarea>
-      </div>
+        <Draggable handle=".toolbar">
+          <div className={classes} onBlur={this.onBlur} onFocus={this.onFocus}>
+            <div style={editorStyle} className="editor">
+              <div className="editor-background"/>
+              <div className="toolbar" onMouseDown={this.onMouseDown}>
+                <EditorButton icon="header"/>
+                <EditorButton icon="bold"/>
+                <EditorButton icon="italic"/>
+              </div>
+              <textarea defaultValue={this.props.text} 
+                        onChange={this.onChange} 
+                        onMouseUp={this.onMouseUp}
+                        onMouseMove={this.onMouseMove}
+                        onKeyUp={this.onKeyUp} 
+                        className="inputfield"></textarea>
+            </div>
+          </div>
+        </Draggable>
     );
   }
 });
