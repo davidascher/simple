@@ -1,28 +1,4 @@
-@system: #000;
-@black: #3B4E5B;
-@white: #FFF;
-
-@turquoise: #64A8EE;
-@blue: #3386C0;
-@secondaryBlue: #315D8A;
-@neonblue: #00a9f5;
-@purple: #8A88CD;
-@yellow: #FFE62C;
-@red: #FF5C5A;
-@green: #1EC08B;
-@slate: #3B4E5B;
-
-@darkGrey: #638093;
-@mediumGrey: #A5BECE;
-@lightGrey: #E1EBF1;
-@extraGrey: #F6F7F7;
-
-@lightGreyUnsaturated: #F5F5F5;
-
-@highlight: @turquoise;
-@darkHighlight: #005d8e;
-@background: @extraGrey;
-
+@import "colors.less";
 
 .editable {
   position: relative;
@@ -59,59 +35,5 @@
   width: 40%;
   background-color: rgba(255,255,255,.9);
   opacity: 1;
-}
-
-
-.editor-container {
-  position: fixed;
-  height: 100%;
-  z-index: 9999;
-  top:0;
-  right:0;
-
-  .inputfield {
-    width: 100%;
-    height: calc(100%-20px);
-    vertical-align: top;
-    color: rgb(0,0,0,.2);
-    padding: 1ex;
-    border: 2px solid @darkGrey;
-    border-top: none;
-    transition: opacity .2s ease-in-out;
-    font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
-  }
-
-  .inputfield:focus {
-    color: @black;
-    outline: none;
-  }
-
-  .toolbar {
-    background-color: @darkGrey;
-    width: 100%;
-    height: 36px;
-    padding: 6px;
-
-    .editor-button {
-      width: 24px;
-      height: 24px;
-      padding: 4px;
-      margin-left: 10px;
-      padding-left: 5px;
-      border-radius: 3px;
-      border: 1px solid @lightGreyUnsaturated;
-      background-color: @lightGrey;
-    }
-    .editor-button:hover {
-      background-color: @highlight;
-      color: @white;
-    }
-  }
-
-}
-
-
-.react-draggable, .cursor {
-  cursor: move;
 }
 
