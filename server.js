@@ -5,7 +5,7 @@ var config = require('./webpack.config');
 new WebpackDevServer(webpack(config), {
   publicPath: config.output.publicPath,
   hot: true
-}).listen(3000, 'localhost', function (err, result) {
+}).listen(process.env.PORT || 3000, 'localhost', function (err, result) {
   if (err) {
     console.log(err);
   }
