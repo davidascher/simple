@@ -3,6 +3,7 @@ var WebpackDevServer = require('webpack-dev-server');
 var config = require('./webpack.config');
 
 if (process.env.NODE_ENV === "heroku") {
+  console.log("Serving PRODUCTION setup");
   var serveStatic = require('serve-static');
   var finalhandler = require('finalhandler')
   var http = require('http')
