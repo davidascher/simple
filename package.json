@@ -1,7 +1,7 @@
 {
-  "name": "react-hot-boilerplate",
-  "version": "1.0.0",
-  "description": "Boilerplate for ReactJS project with hot code reloading",
+  "name": "simple-words",
+  "version": "0.0.1",
+  "description": "An experiment in a writeable web",
   "engines": {
     "node": "0.10.x"
   },
@@ -10,34 +10,24 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gaearon/react-hot-boilerplate.git"
+    "url": "https://github.com/davidascher/simple.git"
   },
   "keywords": [
     "react",
-    "reactjs",
-    "boilerplate",
-    "hot",
-    "hot",
-    "reload",
-    "hmr",
-    "live",
-    "edit",
-    "webpack"
+    "reactjs"
   ],
-  "author": "Dan Abramov <dan.abramov@me.com> (http://github.com/gaearon)",
+  "author": "David Ascher <david.ascher@gmail.com> (http://github.com/davidascher)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/gaearon/react-hot-boilerplate/issues"
+    "url": "https://github.com/davidascher/simple/issues"
   },
-  "homepage": "https://github.com/gaearon/react-hot-boilerplate",
-  "devDependencies": {
+  "homepage": "https://github.com/davidascher/simple",
+  "dependencies": {
     "image-webpack-loader": "^1.2.0",
     "jsx-loader": "^0.12.2",
     "react-hot-loader": "^1.1.1",
     "webpack": "^1.5.3",
-    "webpack-dev-server": "1.6.4"
-  },
-  "dependencies": {
+    "webpack-dev-server": "1.6.4",
     "bootstrap": "^3.3.2",
     "client-firebase": "^1.0.1",
     "css-loader": "^0.9.1",
@@ -51,7 +41,6 @@
     "markdown-js": "0.0.3",
     "markdown-loader": "^0.1.2",
     "marked": "^0.3.3",
-    "marty": "^0.8.12",
     "raw-loader": "^0.5.1",
     "react": "^0.12.0",
     "style-loader": "^0.8.3"
