@@ -1,9 +1,14 @@
 var React = require('react');
-var markdown = require('markdown').markdown;
+var markdown = require('markdown-js').markdown;
 var {loadDoc} = require("./editor.jsx");
 var {isLoggedIn} = require("./loginmock.jsx");
+var Firebase = require("client-firebase");
+var ref = new Firebase("https://folk-words.firebaseio.com/");
 
 require("./editable.less");
+function encodeForFB(thing) {
+  return encodeURIComponent(thing).replace('.', '-');
+}
 
 var EditBlock = React.createClass({
   getInitialState: function() {
@@ -34,23 +39,40 @@ var EditBlock = React.createClass({
   }
 })
 
+
+
 var Editable = React.createClass({
   getInitialState: function() {
     var data = require("../content/"+this.props.path);
     return {
       raw: data,
-      html:markdown.toHTML(data),
+      html:markdown(data),
       editing: false
     }
+  },
+  componentDidMount: function() {
+    var self = this;
+    ref.child(encodeForFB(this.props.path)).on("value",
+      function(snapshot) {
+        var words = snapshot.val();
+        if (words) {
+          self.setState({raw: words,
+            html:markdown(words)
+          });
+        } else {
+          console.log("we have no words for ", self.props.path);
+          ref.child(encodeForFB(self.props.path)).set(self.state.raw);
+        }
+      });
   },
   updateText: function(newText) {
     this.setState({
       raw: newText,
-      html:markdown.toHTML(newText)
+      html:markdown(newText)
     });
   },
-  persistText: function(newText) { 
-    // Save on "disk".
+  persistText: function(newText) {
+    ref.child(encodeForFB(this.props.path)).set(newText);
   },
   render: function() {
     var editor, html;

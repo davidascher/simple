@@ -37,6 +37,7 @@
   },
   "dependencies": {
     "bootstrap": "^3.3.2",
+    "client-firebase": "^1.0.1",
     "css-loader": "^0.9.1",
     "file-loader": "^0.8.1",
     "font-awesome": "^4.3.0",
@@ -45,6 +46,7 @@
     "less": "^2.4.0",
     "less-loader": "^2.0.0",
     "markdown": "^0.5.0",
+    "markdown-js": "0.0.3",
     "markdown-loader": "^0.1.2",
     "marked": "^0.3.3",
     "marty": "^0.8.12",

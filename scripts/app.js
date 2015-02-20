@@ -3,7 +3,7 @@
 var React = require('react');
 var {Editor} = require("./editor.jsx");
 var Editable = require("./editable.jsx");
-var markdown = require('markdown').markdown;
+var markdown = require('markdown-js').markdown;
 var {LoginMock} = require("./loginmock.jsx");
 
 require("bootstrap/dist/css/bootstrap.min.css");
