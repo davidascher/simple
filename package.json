@@ -27,6 +27,7 @@
     "bootstrap": "^3.3.2",
     "client-firebase": "^1.0.1",
     "css-loader": "^0.9.1",
+    "express": "^4.11.2",
     "file-loader": "^0.8.1",
     "finalhandler": "^0.3.3",
     "font-awesome": "^4.3.0",
