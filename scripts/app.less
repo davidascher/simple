@@ -1,4 +1,30 @@
-.container.editing {
-  width: 60%;
+.loggedin .editable:hover {
+  background-color: #fffcc1;
+  transition: background-color .2s ease-in;
 }
 
+//  {
+//   text-shadow: none;
+// }
+.app.loggedin .editable span, 
+.app.loggedin .editable h1, 
+.app.loggedin .editable h2, 
+.app.loggedin .editable div, 
+.app.loggedin .editable button, 
+.app.loggedin .editable a, 
+.app.loggedin .editable li {
+  text-shadow: none;
+  color: black;
+}
+
+.app.loggedin h1, 
+.app.loggedin h2,
+.app.loggedin div,
+.app.loggedin span,
+.app.loggedin button,
+.app.loggedin a,
+.app.loggedin li {
+   color: transparent;
+   transition: .2s ease-in;
+   text-shadow: 0 0 1px rgba(0.5,0.5,0.5,0.5);
+}

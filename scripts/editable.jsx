@@ -22,13 +22,15 @@ var EditBlock = React.createClass({
     window.removeEventListener('login', this._listener);
   },
   render: function() {
+    var classes;
     if (this.state.loggedIn) {
-      return <div onClick={this.toggleEditor} className="button edit-button">
-                <i className="fa fa-2x fa-pencil-square-o"></i>
-              </div>;
+      classes = "button edit-button visible";
     } else {
-      return <div></div>
+      classes = "button edit-button hidden";
     }
+    return <div onClick={this.toggleEditor} className={classes}>
+              <i className="fa fa-2x fa-pencil-square-o"></i>
+            </div>;
   }
 })
 

@@ -17,8 +17,18 @@ var App = React.createClass({
       editing: false,
       editable: {
         raw:""
-      }
+      },
+      loggedIn: false
     }
+  },
+  componentDidMount: function() {
+    var self = this;
+    this._listener = window.addEventListener('login', function (e) { 
+      self.setState(e.detail)
+     }, false);
+  },
+  componentWillUnmount: function() {
+    window.removeEventListener('login', this._listener);
   },
   editEditable: function(editable, text) {
     this.setState({
@@ -43,49 +53,51 @@ var App = React.createClass({
   },
   render() {
     var self = this;
-    var className = this.state.editing ? "container editing" : "container";
+    var className = this.state.loggedIn ? "app loggedin" : "app loggedout";
     return (
-    <div>
-      <nav className="navbar navbar-inverse navbar-fixed-top">
-        <div className="container">
-          <div className="navbar-header">
-            <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-              <span className="sr-only">Toggle navigation</span>
-              <span className="icon-bar"></span>
-              <span className="icon-bar"></span>
-              <span className="icon-bar"></span>
-            </button>
-            <a className="navbar-brand" href="#">Project name</a>
+      <div>
+      <div className={className}>
+        <nav className="navbar navbar-inverse navbar-fixed-top">
+          <div className="container">
+            <div className="navbar-header">
+              <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span className="sr-only">Toggle navigation</span>
+                <span className="icon-bar"></span>
+                <span className="icon-bar"></span>
+                <span className="icon-bar"></span>
+              </button>
+              <a className="navbar-brand" href="#">Project name</a>
+            </div>
+            <div id="navbar" className="navbar-collapse collapse">
+              <LoginMock/>
+            </div>
+            <div id="navbar" className="navbar-right">
+            </div>
           </div>
-          <div id="navbar" className="navbar-collapse collapse">
-            <LoginMock/>
-          </div>
-          <div id="navbar" className="navbar-right">
+        </nav>
+
+        <div className="jumbotron">
+          <div className="container">
+            <Editable path="jumbo.md"/>
+            <p><a className="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
           </div>
         </div>
-      </nav>
 
-      <div className="jumbotron">
         <div className="container">
-          <Editable path="jumbo.md"/>
-          <p><a className="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
-        </div>
-      </div>
-
-      <div className="container">
-        <div className="row">
-          <div className="col-md-4">
-            <Editable path="col1.md"/>
-          </div>
-          <div className="col-md-4">
-            <h2>Heading</h2>
-            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-            <p><a className="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-         </div>
-          <div className="col-md-4">
-            <h2>Heading</h2>
-            <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-            <p><a className="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+          <div className="row">
+            <div className="col-md-4">
+              <Editable path="col1.md"/>
+            </div>
+            <div className="col-md-4">
+              <h2>Heading</h2>
+              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+              <p><a className="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+           </div>
+            <div className="col-md-4">
+              <h2>Heading</h2>
+              <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+              <p><a className="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+            </div>
           </div>
         </div>
       </div>
