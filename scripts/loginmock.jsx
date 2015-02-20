@@ -1,5 +1,6 @@
 var React = require('react');
 var amLoggedIn = false;
+require("./loginmock.less");
 
 var LoginMock = React.createClass({
   getInitialState: function() {
@@ -19,9 +20,9 @@ var LoginMock = React.createClass({
   },
   render: function() {
     if (this.state.loggedIn) {
-      return <span>logged in <button onClick={this.signout}>sign out</button></span>
+      return <div className="loginbar"><button className="btn" onClick={this.signout}>sign out</button></div>
     } else {
-      return <button onClick={this.signin}>sign in</button>
+      return <div className="loginbar"><button className="btn btn-success" onClick={this.signin}>sign in</button></div>
     }
   }
 });

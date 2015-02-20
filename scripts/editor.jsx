@@ -69,38 +69,35 @@ var Editor = React.createClass({
     this.setState({visible:false});
   },
   render: function() {
-    var editorStyle = {
-      display: this.state.visible == true ? "block" : "none",
-    }
-    var classes = "editor-container "; 
+    var classes = "editor-container ";
+    var editorStyle = "";
     if (this.state.visible) {
       classes = classes + "active";
+      editorStyle = "active";
       if (this.state.blurred) {
         classes = classes + " blurred";
       }
     } else {
+      editorStyle = "collapsed";
       classes = classes + "collapsed";
     }
     var text = this.state.text;
     return (
       <div className={classes}>
-
-        <div XXstyle={editorStyle} className="editor">
-          <div className="editor-background"/>
-          <div className="toolbar" onMouseDown={this.onMouseDown}>
-            <EditorButton icon="header"/>
-            <EditorButton icon="bold"/>
-            <EditorButton icon="italic"/>
-            <EditorButton onClick={this.save} icon="save"/>
-            <EditorButton onClick={this.close} icon="close"/>
-          </div>
-          <textarea value={text} 
-                    ref="textInput"
-                    onChange={this.onChange} 
-                    onKeyPress={this.onKeyPress} 
-                    onKeyUp={this.onKeyUp} 
-                    className="inputfield"></textarea>
+        <div className="editor-background"/>
+        <div className="toolbar" onMouseDown={this.onMouseDown}>
+          <EditorButton icon="header"/>
+          <EditorButton icon="bold"/>
+          <EditorButton icon="italic"/>
+          <EditorButton onClick={this.save} icon="save"/>
+          <EditorButton onClick={this.close} icon="close"/>
         </div>
+        <textarea value={text} 
+                  ref="textInput"
+                  onChange={this.onChange} 
+                  onKeyPress={this.onKeyPress} 
+                  onKeyUp={this.onKeyUp} 
+                  className="inputfield"></textarea>
       </div>
     );
   }

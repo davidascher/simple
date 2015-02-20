@@ -58,11 +58,9 @@ var App = React.createClass({
             <a className="navbar-brand" href="#">Project name</a>
           </div>
           <div id="navbar" className="navbar-collapse collapse">
-            <a className="login">
-              <LoginMock/>
-            </a>
+            <LoginMock/>
           </div>
-          <div id="navbar" className="navbar-collapse collapse">
+          <div id="navbar" className="navbar-right">
           </div>
         </div>
       </nav>

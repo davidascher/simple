@@ -1,18 +1,20 @@
 @import "colors.less";
 
-.editor-container {
+.editor-container.collapsed {
+  z-index: -100;
+  border: none;
+}
+
+.editor-container.active {
+  background-color: rgba(255,255,255,.9);
+  z-index: 10000;
   position: fixed;
   height: 100%;
-  z-index: 9999;
   top:0;
   right:0;
   bottom: 0;
   width: 40%;
 
-
-  .active {
-    background-color: rgba(255,255,255,.9);
-  }
 
 
   .inputfield {
@@ -22,6 +24,7 @@
     color: rgb(0,0,0,.2);
     padding: 1ex;
     border: 2px solid @darkGrey;
+    // border-left: none;
     border-top: none;
     transition: opacity .2s ease-in-out;
     font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
@@ -49,7 +52,7 @@
       background-color: @lightGrey;
     }
     .editor-button:hover {
-      background-color: @highlight;
+      background-color: #013E5F;
       color: @white;
     }
   }
@@ -75,8 +78,5 @@
 
 .react-draggable, .cursor {
   cursor: move;
-}
-.editor-container.collapsed {
-  z-index: -100;
 }
 
