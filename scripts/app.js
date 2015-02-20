@@ -4,6 +4,7 @@ var React = require('react');
 var {Editor} = require("./editor.jsx");
 var Editable = require("./editable.jsx");
 var markdown = require('markdown').markdown;
+var {LoginMock} = require("./loginmock.jsx");
 
 require("bootstrap/dist/css/bootstrap.min.css");
 require("bootstrap/dist/css/bootstrap-theme.min.css");
@@ -55,6 +56,11 @@ var App = React.createClass({
               <span className="icon-bar"></span>
             </button>
             <a className="navbar-brand" href="#">Project name</a>
+          </div>
+          <div id="navbar" className="navbar-collapse collapse">
+            <a className="login">
+              <LoginMock/>
+            </a>
           </div>
           <div id="navbar" className="navbar-collapse collapse">
           </div>

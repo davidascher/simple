@@ -1,8 +1,36 @@
 var React = require('react');
 var markdown = require('markdown').markdown;
 var {loadDoc} = require("./editor.jsx");
+var {isLoggedIn} = require("./loginmock.jsx");
 
 require("./editable.less");
+
+var EditBlock = React.createClass({
+  getInitialState: function() {
+    return {loggedIn: isLoggedIn()}
+  },
+  toggleEditor: function() {
+    loadDoc(this.props.editable, this.props.editable.state.raw);
+  },
+  componentDidMount: function() {
+    var self = this;
+    this._listener = window.addEventListener('login', function (e) { 
+      self.setState(e.detail)
+     }, false);
+  },
+  componentWillUnmount: function() {
+    window.removeEventListener('login', this._listener);
+  },
+  render: function() {
+    if (this.state.loggedIn) {
+      return <div onClick={this.toggleEditor} className="button edit-button">
+                <i className="fa fa-2x fa-pencil-square-o"></i>
+              </div>;
+    } else {
+      return <div></div>
+    }
+  }
+})
 
 var Editable = React.createClass({
   getInitialState: function() {
@@ -12,9 +40,6 @@ var Editable = React.createClass({
       html:markdown.toHTML(data),
       editing: false
     }
-  },
-  toggleEditor: function() {
-    loadDoc(this, this.state.raw);
   },
   updateText: function(newText) {
     this.setState({
@@ -34,9 +59,7 @@ var Editable = React.createClass({
     return (
       <div>
         <div className="editable">
-          <div onClick={this.toggleEditor} className="button edit-button">
-            <i className="fa fa-2x fa-pencil-square-o"></i>
-          </div>
+          <EditBlock editable={this}/>
           <div className="contents">
             {contents}
           </div>
