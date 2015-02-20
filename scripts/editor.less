@@ -6,10 +6,18 @@
   z-index: 9999;
   top:0;
   right:0;
+  bottom: 0;
+  width: 40%;
+
+
+  .active {
+    background-color: rgba(255,255,255,.9);
+  }
+
 
   .inputfield {
     width: 100%;
-    height: calc(100%-20px);
+    height: calc(100%);
     vertical-align: top;
     color: rgb(0,0,0,.2);
     padding: 1ex;
@@ -45,11 +53,30 @@
       color: @white;
     }
   }
-
 }
 
+.blurred .toolbar {
+  background-color: rgba(255,255,255,.1);
+  opacity: .3;
+}
+
+.blurred .inputfield {
+  background-color: rgba(255,255,255,.1);
+  opacity: .3;
+}
+.inputfield {
+  background-color: rgba(255,255,255,.9);
+}
+
+.fa-close {
+  position: fixed;
+  right: 1em;
+}
 
 .react-draggable, .cursor {
   cursor: move;
+}
+.editor-container.collapsed {
+  z-index: -100;
 }
 

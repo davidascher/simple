@@ -1,11 +1,12 @@
 var React = require('react');
 var markdown = require('markdown').markdown;
+var {loadDoc} = require("./editor.jsx");
 
 require("./editable.less");
 
 var Editable = React.createClass({
   getInitialState: function() {
-    var data = require("../content/"+this.props.fileName);
+    var data = require("../content/"+this.props.path);
     return {
       raw: data,
       html:markdown.toHTML(data),
@@ -13,24 +14,20 @@ var Editable = React.createClass({
     }
   },
   toggleEditor: function() {
-    console.log(this.props);
-    // let the editor know the text, and to become visible
-    this.props.app.editEditable(this, this.state.raw);
-    // this.setState({'editing': ! this.state.editing });
+    loadDoc(this, this.state.raw);
   },
   updateText: function(newText) {
     this.setState({
-      raw: newText.raw,
-      md:markdown.toHTML(newText.raw)
+      raw: newText,
+      html:markdown.toHTML(newText)
     });
+  },
+  persistText: function(newText) { 
+    // Save on "disk".
   },
   render: function() {
     var editor, html;
-    if (this.props.raw) {
-      html = markdown.toHTML(this.props.raw);
-    } else {
-      html = this.state.html;
-    }
+    html = this.state.html;
     var contents = React.DOM.span({
      dangerouslySetInnerHTML: {__html: html}
     });

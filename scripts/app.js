@@ -1,15 +1,14 @@
 'use strict';
 
 var React = require('react');
-var Editor = require("./editor.jsx");
+var {Editor} = require("./editor.jsx");
 var Editable = require("./editable.jsx");
 var markdown = require('markdown').markdown;
 
 require("bootstrap/dist/css/bootstrap.min.css");
 require("bootstrap/dist/css/bootstrap-theme.min.css");
+require("./makerstrap.css");
 require("./app.less");
-
-
 
 var App = React.createClass({
   getInitialState: function() {
@@ -21,13 +20,11 @@ var App = React.createClass({
     }
   },
   editEditable: function(editable, text) {
-    console.log("editEditable", editable, text);
     this.setState({
       editing: true,
       editable:editable,
       text:text
     })
-    console.log(text.slice(0,40));
   },
   textChanged: function(value) {
     this.state.editable.updateText({ raw: value })
@@ -39,9 +36,8 @@ var App = React.createClass({
     // Figure out state management here.
   },
   onKeyDown: function(event) {
-    console.log("EVENT", event);
     if (event.keyCode === 13) {
-      this.props.dismissEditor(event);
+      this.props.dismissEditor(event); // maybe should offer to save?
     }
   },
   render() {
@@ -67,8 +63,7 @@ var App = React.createClass({
 
       <div className="jumbotron">
         <div className="container">
-          <h1>Hello, world!</h1>
-          <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+          <Editable path="jumbo.md"/>
           <p><a className="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
         </div>
       </div>
@@ -76,7 +71,7 @@ var App = React.createClass({
       <div className="container">
         <div className="row">
           <div className="col-md-4">
-            <Editable app={self} raw={self.state.raw} fileName="col1.md"/>
+            <Editable path="col1.md"/>
           </div>
           <div className="col-md-4">
             <h2>Heading</h2>
@@ -90,10 +85,7 @@ var App = React.createClass({
           </div>
         </div>
       </div>
-      <Editor visible={this.state.editing} 
-              text={this.state.text} 
-              textChanged={this.textChanged}
-              editable={this.state.editable}/>
+      <Editor/>
     </div>
     );
   }

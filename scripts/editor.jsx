@@ -4,66 +4,101 @@ var markdown = require('markdown').markdown;
 require("./editor.less");
 
 var EditorButton = React.createClass({
-  onClick: function(event) {
-    event.preventDefault();
-    console.log("got click", this.props.icon);
-  },
   render: function() {
     var classnames = "editor-button fa fa-" + this.props.icon;
     return (
-      <i className={classnames} onClick={this.onClick}/>
+      <i className={classnames} onClick={this.props.onClick}/>
     );
   }
 });
+
+var singletonEditor = null;
+
+var loadDoc = function(editable, text) {
+  if (singletonEditor) {
+    singletonEditor.loadDoc(editable, text)
+  } else {
+    console.log("we have no editor setup");
+  }
+};
 
 var Editor = React.createClass({
   getInitialState:function() {
     return {blurred:false};
   },
+  componentDidMount: function() {
+    if (singletonEditor) { 
+      console.log("Uh-oh -- shouldn't have more than one editor");
+      return;
+    }
+    singletonEditor = this;
+  },
+  loadDoc: function(editable, text) {
+    this.setState({editable: editable, initialText: text, text:text, visible:true, blurred:false})
+    // this.refs.textInput.getDOMNode().focus();  // doesn't seem to work, not surprisingly
+  },
   onChange: function(event) {
     this.setState({text: event.target.value});
-    this.props.textChanged(event.target.value)
+    this.state.editable.updateText(event.target.value);
   },
   onKeyPress: function(event) {
-    this.props.textChanged(event.target.value);
+    this.state.editable.updateText(event.target.value);
+  },
+  onKeyUp: function(event) {
+    if (event.keyCode === 27) {
+      this.close(); // is that what people want?
+    }
   },
   onMouseDown: function(event) {
 
   },
   onMouseMove: function(event) {
-    // console.log(event);
   },
   onBlur: function(event) {
-    console.log("got blur event");
     this.setState({blurred:true})
   },
   onFocus: function(event) {
-    console.log("got focus event");
     this.setState({blurred:false})
+  },
+  save: function(event) {
+    this.state.editable.persistText(this.state.text);
+    this.setState({visible:false});
+  },
+  close: function(event) {
+    this.state.editable.updateText(this.state.initialText);
+    this.setState({visible:false});
   },
   render: function() {
     var editorStyle = {
-      display: this.props.visible == true ? "block" : "none",
+      display: this.state.visible == true ? "block" : "none",
     }
-    var classes = "editor-container ";
-    if (this.props.visible) {
+    var classes = "editor-container "; 
+    if (this.state.visible) {
       classes = classes + "active";
+      if (this.state.blurred) {
+        classes = classes + " blurred";
+      }
     } else {
       classes = classes + "collapsed";
     }
-    var text = this.state.text || this.props.text;
+    var text = this.state.text;
     return (
       <div className={classes}>
-        <div style={editorStyle} className="editor">
+
+        <div XXstyle={editorStyle} className="editor">
           <div className="editor-background"/>
           <div className="toolbar" onMouseDown={this.onMouseDown}>
             <EditorButton icon="header"/>
             <EditorButton icon="bold"/>
             <EditorButton icon="italic"/>
+            <EditorButton onClick={this.save} icon="save"/>
+            <EditorButton onClick={this.close} icon="close"/>
           </div>
           <textarea value={text} 
+                    ref="textInput"
                     onChange={this.onChange} 
                     onKeyPress={this.onKeyPress} 
+                    onKeyUp={this.onKeyUp} 
                     className="inputfield"></textarea>
         </div>
       </div>
@@ -71,4 +106,7 @@ var Editor = React.createClass({
   }
 });
 
-module.exports = Editor;
+
+
+module.exports.Editor = Editor;
+module.exports.loadDoc = loadDoc;
